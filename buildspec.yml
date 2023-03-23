@@ -7,5 +7,5 @@ phases:
       - cd ..
       - zip -g deployment_package.zip index.js index.html
       - echo "updating lambda code"
-      - aws lambda update-function-code --function-name myfunction
+      - aws lambda update-function-code --function-name myfunction --zip-file fileb://deployment_package.zip
       - echo "DONE!!"
