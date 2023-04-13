@@ -4,11 +4,9 @@ phases:
     commands:
       - echo "Zipping deployment package..."
       - zip -r9 ../deployment_package.zip .
+      - aws sns publish --topic-arn arn:aws:sns:ap-south-1:209367504025:codebuild-sns "CodeBuild Approval Required" --message "Please approve this CodeBuild run to continue.
       - cd ..
  #     - zip -g deployment_package.zip index.js index.html
       - echo "updating lambda code"
       - aws lambda update-function-code --function-name myfunction --zip-file fileb://deployment_package.zip
-      - echo "DONE!!"
-  approval:
-    commands:
-      - aws sns publish --topic-arn arn:aws:sns:ap-south-1:209367504025:codebuild-sns "CodeBuild Approval Required" --message "Please approve this CodeBuild run to continue.
+      - echo "DONE"
